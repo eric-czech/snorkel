@@ -65,3 +65,4 @@ def reload_annotator_labels(session, candidate_class, annotator_name, split, fil
 
     session.commit()
     print("AnnotatorLabels created: %s, missed: %s" % (len(labels), len(missed)))
+    return labels, missed
