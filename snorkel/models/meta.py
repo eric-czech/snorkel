@@ -36,7 +36,8 @@ def new_sessionmaker():
     if snorkel_postgres:
         snorkel_engine = create_engine(snorkel_conn_string, isolation_level="AUTOCOMMIT")
     else:
-        snorkel_engine = create_engine(snorkel_conn_string)
+	# Increase timeout to 10 mins for long running, concurrent tasks
+        snorkel_engine = create_engine(snorkel_conn_string, connect_args={'timeout': 600})
 
     # New sessionmaker
     SnorkelSession = sessionmaker(bind=snorkel_engine)
